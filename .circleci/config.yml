@@ -18,6 +18,9 @@ jobs:
       - aws-cli/setup
       # install dependencies in both apps
       - run:
+          name: Install Yarn
+          command: sudo npm install -g yarn
+      - run:
           name: Front-End Install
           command: |
             npm run frontend:install
@@ -29,9 +32,6 @@ jobs:
           name: Front-End Build
           command: |
             npm run frontend:build
-      - run:
-          name: Install Yarn
-          command: sudo npm install -g yarn
       - run:
           name: Back-End Build
           command: |
