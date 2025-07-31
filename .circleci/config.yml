@@ -1,25 +1,16 @@
 version: 2.1
 orbs:
-  # orgs contain basc recipes and reproducible actions (install node, aws, etc.)
-  node: circleci/node@4.1.0
-  aws-cli: circleci/aws-cli@1.3.1
-  # different jobs are calles later in the workflows sections
+  node: circleci/node@5.0.2
+  eb: circleci/aws-elastic-beanstalk@2.0.1
+  aws-cli: circleci/aws-cli@3.1.1
 jobs:
   build:
     docker:
-      # the base image can run most needed actions with orbs
-      # - image: "cimg/base:stable"
-      - image: cimg/node:14.15
+      - image: "cimg/node:14.15"
     steps:
-      # - node/install
-      # - checkout
+      - node/install
       - checkout
-      # - node/install # ← هذا الآن سيعمل لأن البيئة تدعم node
       - aws-cli/setup
-      # install dependencies in both apps
-      - run:
-          name: Install Yarn
-          command: npm install -g yarn
       - run:
           name: Front-End Install
           command: |
@@ -36,6 +27,7 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
-          # name: hello
-          # command: |
-          #   echo "hello-world"
+      - run:
+          name: Deploy App
+          command: |
+            npm run frontend:deploy
