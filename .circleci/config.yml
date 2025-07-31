@@ -26,9 +26,6 @@ jobs:
           command: |
             npm run frontend:build
       - run:
-          name: Install Yarn
-          command: sudo npm install -g yarn
-      - run:
           name: Back-End Build
           command: |
             npm run backend:build
