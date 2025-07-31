@@ -19,7 +19,7 @@ jobs:
       # install dependencies in both apps
       - run:
           name: Install Yarn
-          command: sudo npm install -g yarn
+          command: npm install -g yarn
       - run:
           name: Front-End Install
           command: |
